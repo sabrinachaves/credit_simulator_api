@@ -14,15 +14,15 @@
     "format": "eslint --fix '**/*.ts' && prettier --write '**/*.ts'",
     "lint": "npm run lint:tsc && eslint '**/*.ts' && prettier --check \"src/**/*.(ts|tsx)\"",
     "typeorm": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js",
-    "migration:generate": "npm run typeorm -- migration:generate ./src/database/migrations/$npm_config_name -d ./src/database/dataSource.ts",
-    "migration:run": "npm run typeorm -- migration:run -d ./src/database/dataSource.ts",
-    "migration:revert": "npm run typeorm -- migration:revert -d ./src/database/dataSource.ts",
+    "migration:generate": "npm run typeorm -- migration:generate ./src/database/migrations/$npm_config_name -d ./src/infrastructure/database/dataSource.ts",
+    "migration:run": "npm run typeorm -- migration:run -d ./src/infrastructure/database/dataSource.ts",
+    "migration:revert": "npm run typeorm -- migration:revert -d ./src/infrastructure/database/dataSource.ts",
     "test": "jest --bail --forceExit --testPathIgnorePatterns \"tests/e2e/.*\\.test\\.ts\"",
     "test:unit": "jest --bail --forceExit --passWithNoTests \"tests/unit/.*\\.test\\.ts\"",
     "test:integration": "jest --bail --forceExit --passWithNoTests \"tests/integration/.*\\.test\\.ts\"",
     "test:e2e": "jest --verbose --runInBand --passWithNoTests \"tests/e2e/.*\\.test\\.ts\"",
     "test:coverage": "npm run test -- --coverage",
-    "stress:create": "autocannon localhost:3000/credit-simulation/v1/simulate -m POST -H 'Content-Type: application/json' -b '{\"amount\":10000,\"paymentTerm\":36,\"birthDate\":\"2000-12-05\"}' -c 5000 -d 10 --latency --renderStatusCode"
+    "stress:create": "autocannon localhost:3000/credit-simulation/v1/simulate -m POST -H 'Content-Type: application/json' -b '{\"amount\":10000,\"paymentTerm\":36,\"birthDate\":\"2000-12-05\"}' -c 1000 -d 10 --latency --renderStatusCode"
   },
   "husky": {
     "hooks": {
