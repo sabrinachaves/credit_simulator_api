@@ -1,6 +1,8 @@
 import * as http from 'http';
 import express, { RequestHandler } from 'express';
 import 'reflect-metadata';
+import * as swaggerUI from 'swagger-ui-express';
+import * as swaggerDocument from '../../swagger-doc.json';
 
 interface AppOptions {
   port: number;
@@ -29,6 +31,7 @@ export default class App {
 
   private handlerRoutes(): void {
     this.app.use(this.routes);
+    this.app.use('/credit-simulation/v1/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerDocument));
   }
 
   private handlerMiddlewares(): void {
