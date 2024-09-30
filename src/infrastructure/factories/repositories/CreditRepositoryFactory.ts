@@ -11,9 +11,7 @@ export default class CreditRepositoryFactory {
       return this.repository;
     }
 
-    const database = await DatabaseFactory.make();
-    const dataSource = database.getDataSource();
-
+    const dataSource = (await DatabaseFactory.make()).getDataSource();
     const creditRepository = dataSource.getRepository(CreditSimulation);
 
     this.repository = new CreditRepository(creditRepository);
