@@ -1,0 +1,140 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Credit Simulator API - credit_simulator_api",
+    "description": "API for credit simulations",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000",
+      "description": "Local development server"
+    }
+  ],
+  "paths": {
+    "/credit-simulation/v1/simulate": {
+      "post": {
+        "summary": "Create a credit simulation",
+        "tags": [
+          "Credit Simulation"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "amount",
+                  "paymentTerm",
+                  "birthDate"
+                ],
+                "properties": {
+                  "amount": {
+                    "type": "number",
+                    "description": "The amount of credits requested."
+                  },
+                  "paymentTerm": {
+                    "type": "number",
+                    "description": "The deadline for the loan to be paid, in months."
+                  },
+                  "birthDate": {
+                    "type": "string",
+                    "format": "date",
+                    "description": "The applicant's date of birth."
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Credit simulation created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ICreditSimulation"
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable entity error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "oneOf": [
+                        {
+                          "type": "string",
+                          "example": "Age cannot be less than 18"
+                        },
+                        {
+                          "type": "string",
+                          "example": "Age cannot be greater than 95"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ICreditSimulation": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The unique identifier of the credit simulation."
+          },
+          "amount": {
+            "type": "number",
+            "description": "The amount of credits requested."
+          },
+          "paymentTerm": {
+            "type": "number",
+            "description": "The deadline for the loan to be paid, in months."
+          },
+          "birthDate": {
+            "type": "string",
+            "format": "date",
+            "description": "The applicant's date of birth."
+          },
+          "amountToBePaid": {
+            "type": "number",
+            "description": "The amount to be paid considering the interest applied."
+          },
+          "installmentsValue": {
+            "type": "number",
+            "description": "The value of each installment."
+          },
+          "amountPaidInInterest": {
+            "type": "number",
+            "description": "The total amount of interest to be paid."
+          },
+          "interestRate": {
+            "type": "number",
+            "description": "The annual interest rate used."
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date",
+            "description": "The creation date of the credit simulation."
+          }
+        }
+      }
+    }
+  }
+}
