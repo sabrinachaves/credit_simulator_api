@@ -61,9 +61,7 @@ describe('CreateController', () => {
       })),
     };
 
-    createUseCase.handle = jest
-      .fn()
-      .mockRejectedValueOnce(new UnprocessableEntityError('Age can not be less than 18 years old'));
+    createUseCase.handle = jest.fn().mockRejectedValueOnce(new UnprocessableEntityError('Age cannot be less than 18'));
 
     await instance.execute(req, res);
 

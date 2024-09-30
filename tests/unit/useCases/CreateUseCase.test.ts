@@ -112,7 +112,7 @@ describe('CreateCreditSimulationUseCase', () => {
       expect(response.amountPaidInInterest).toBe(403.05);
   });
 
-  it('should thrown an error when age is less than 18', async () => {
+  it('should throw an error when age is less than 18', async () => {
     const creditSimulationInput = {
       birthDate: new Date('2008-01-01'),
       amount: 10000,
@@ -120,7 +120,19 @@ describe('CreateCreditSimulationUseCase', () => {
     };
 
     await expect(createUseCase.handle(creditSimulationInput)).rejects.toThrow(
-      new UnprocessableEntityError('Age can not be less than 18 years old'),
+      new UnprocessableEntityError('Age cannot be less than 18'),
+    );
+  });
+
+  it('should throw an error when age is greater than 95', async () => {
+    const creditSimulationInput = {
+      birthDate: new Date('1924-01-01'),
+      amount: 10000,
+      paymentTermInMonths: 12,
+    };
+
+    await expect(createUseCase.handle(creditSimulationInput)).rejects.toThrow(
+      new UnprocessableEntityError('Age cannot be greater than 95'),
     );
   });
 });
