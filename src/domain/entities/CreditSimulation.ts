@@ -3,7 +3,7 @@ import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn } from 'typeor
 export interface ICreditSimulation {
   id: string;
   amount: number;
-  paymentTerm: number;
+  paymentTermInMonths: number;
   birthDate: Date;
   amountToBePaid: number;
   installmentsValue: number;
@@ -21,7 +21,7 @@ export class CreditSimulation implements ICreditSimulation {
   amount: number;
 
   @Column()
-  paymentTerm: number;
+  paymentTermInMonths: number;
 
   @Column()
   birthDate: Date;

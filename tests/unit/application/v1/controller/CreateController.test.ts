@@ -28,7 +28,7 @@ describe('CreateController', () => {
     createUseCase.handle = jest.fn().mockResolvedValue({
       id: faker.datatype.uuid(),
       amount: 15000,
-      paymentTerm: 15,
+      paymentTermInMonths: 15,
       birthDate: new Date('2005-05-01'),
       amountToBePaid: 15504.9,
       installmentsValue: 1033.66,

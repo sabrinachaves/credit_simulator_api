@@ -19,7 +19,7 @@ export default class CreateUseCase implements ICreateUseCase {
     const credit = await this.creditRepository.create({
       id: uuidv4(),
       amount: data.amount,
-      paymentTerm: data.paymentTermInMonths,
+      paymentTermInMonths: data.paymentTermInMonths,
       birthDate: data.birthDate,
       amountToBePaid: amountToBePaid,
       installmentsValue,
