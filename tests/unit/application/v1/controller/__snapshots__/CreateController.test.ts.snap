@@ -1,0 +1,8 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CreateController should match the snapshot #unit 1`] = `
+CreateController {
+  "createUseCase": Object {},
+  "execute": [Function],
+}
+`;
