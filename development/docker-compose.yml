@@ -31,4 +31,4 @@ services:
       - MYSQL_ROOT_PASSWORD=any
       - MYSQL_DATABASE=credit-simulator
       - DB_PORT=3306
-    command: ash -c "npm i --no-update-notifier && npm run dev && migration:run"
+    command: ash -c "npm i --no-update-notifier && npm run dev && npm run migration:run"
