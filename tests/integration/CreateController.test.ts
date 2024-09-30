@@ -4,6 +4,7 @@ import { mockServer } from '../helpers';
 import CreditRepositoryMock from '../mocks/CreditRepositoryMock';
 import CreateUseCaseFactory from '../../src/infrastructure/factories/useCases/CreateUseCaseFactory';
 import { CreditSimulationMock } from '../mocks/CreditMock';
+import { ICreditSimulation } from '../../src/domain/entities/CreditSimulation';
 
 describe('CreateController', () => {
   let server: supertest.SuperTest<supertest.Test>;
@@ -24,7 +25,10 @@ describe('CreateController', () => {
       paymentTermInMonths: 36,
       birthDate: '1990-12-05',
     };
-    creditRepositoryMock.create = jest.fn().mockResolvedValueOnce({ ...CreditSimulationMock, ...simulationRequest });
+
+    creditRepositoryMock.create = jest
+      .fn()
+      .mockImplementationOnce((data): Promise<ICreditSimulation> => Promise.resolve(data as ICreditSimulation));
 
     return new Promise((done) => {
       server
@@ -33,15 +37,15 @@ describe('CreateController', () => {
         .end((err, response) => {
           expect(err).toBeNull();
           expect(response.statusCode).toEqual(OK);
-          expect(response.body.amount).toBe(10000),
-            expect(response.body.paymentTermInMonths).toBe(36),
-            expect(response.body.amountToBePaid).toBe(20183.8),
-            expect(response.body.installmentsValue).toBe(2018.38),
-            expect(response.body.amountPaidInInterest).toBe(183.8),
-            expect(response.body.interestRate).toBe(2),
-            expect(response.body).toHaveProperty('id'),
-            expect(response.body).toHaveProperty('birthDate'),
-            expect(creditRepositoryMock.create).toHaveBeenCalled();
+          expect(response.body.amount).toBe(10000);
+          expect(response.body.paymentTermInMonths).toBe(36);
+          expect(response.body.amountToBePaid).toBe(10469.16);
+          expect(response.body.installmentsValue).toBe(290.81);
+          expect(response.body.amountPaidInInterest).toBe(469.16);
+          expect(response.body.interestRate).toBe(3);
+          expect(response.body).toHaveProperty('id');
+          expect(response.body).toHaveProperty('birthDate');
+          expect(creditRepositoryMock.create).toHaveBeenCalled();
           done(undefined);
         });
     });
