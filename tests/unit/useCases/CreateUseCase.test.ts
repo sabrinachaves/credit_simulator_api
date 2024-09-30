@@ -20,7 +20,7 @@ describe('CreateCreditSimulationUseCase', () => {
     const creditSimulationInput = {
       birthDate: new Date('2005-05-01'),
       amount: 15000,
-      paymentTermInMonths: 15,
+      paymentTerm: 15,
     };
 
     const response = await createUseCase.handle(creditSimulationInput);
@@ -28,7 +28,7 @@ describe('CreateCreditSimulationUseCase', () => {
     expect(creditRepository.create).toHaveBeenCalledTimes(1);
     expect(response).toHaveProperty('id');
     expect(response).toHaveProperty('amount');
-    expect(response).toHaveProperty('paymentTermInMonths');
+    expect(response).toHaveProperty('paymentTerm');
     expect(response).toHaveProperty('birthDate');
     expect(response).toHaveProperty('amountToBePaid');
     expect(response).toHaveProperty('installmentsValue');
@@ -44,7 +44,7 @@ describe('CreateCreditSimulationUseCase', () => {
     const creditSimulationInput = {
       birthDate: new Date('1990-05-01'),
       amount: 15000,
-      paymentTermInMonths: 15,
+      paymentTerm: 15,
     };
 
     const response = await createUseCase.handle(creditSimulationInput);
@@ -52,7 +52,7 @@ describe('CreateCreditSimulationUseCase', () => {
     expect(creditRepository.create).toHaveBeenCalledTimes(1);
     expect(response).toHaveProperty('id');
     expect(response).toHaveProperty('amount');
-    expect(response).toHaveProperty('paymentTermInMonths');
+    expect(response).toHaveProperty('paymentTerm');
     expect(response).toHaveProperty('birthDate');
     expect(response).toHaveProperty('amountToBePaid');
     expect(response).toHaveProperty('installmentsValue');
@@ -68,7 +68,7 @@ describe('CreateCreditSimulationUseCase', () => {
     const creditSimulationInput = {
       birthDate: new Date('1969-05-01'),
       amount: 15000,
-      paymentTermInMonths: 15,
+      paymentTerm: 15,
     };
 
     const response = await createUseCase.handle(creditSimulationInput);
@@ -76,7 +76,7 @@ describe('CreateCreditSimulationUseCase', () => {
     expect(creditRepository.create).toHaveBeenCalledTimes(1);
     expect(response).toHaveProperty('id');
     expect(response).toHaveProperty('amount');
-    expect(response).toHaveProperty('paymentTermInMonths');
+    expect(response).toHaveProperty('paymentTerm');
     expect(response).toHaveProperty('birthDate');
     expect(response).toHaveProperty('amountToBePaid');
     expect(response).toHaveProperty('installmentsValue');
@@ -92,7 +92,7 @@ describe('CreateCreditSimulationUseCase', () => {
     const creditSimulationInput = {
       birthDate: new Date('1959-05-01'),
       amount: 15000,
-      paymentTermInMonths: 15,
+      paymentTerm: 15,
     };
 
     const response = await createUseCase.handle(creditSimulationInput);
@@ -100,7 +100,7 @@ describe('CreateCreditSimulationUseCase', () => {
     expect(creditRepository.create).toHaveBeenCalledTimes(1);
     expect(response).toHaveProperty('id');
     expect(response).toHaveProperty('amount');
-    expect(response).toHaveProperty('paymentTermInMonths');
+    expect(response).toHaveProperty('paymentTerm');
     expect(response).toHaveProperty('birthDate');
     expect(response).toHaveProperty('amountToBePaid');
     expect(response).toHaveProperty('installmentsValue');
@@ -116,7 +116,7 @@ describe('CreateCreditSimulationUseCase', () => {
     const creditSimulationInput = {
       birthDate: new Date('2008-01-01'),
       amount: 10000,
-      paymentTermInMonths: 12,
+      paymentTerm: 12,
     };
 
     await expect(createUseCase.handle(creditSimulationInput)).rejects.toThrow(
@@ -128,7 +128,7 @@ describe('CreateCreditSimulationUseCase', () => {
     const creditSimulationInput = {
       birthDate: new Date('1924-01-01'),
       amount: 10000,
-      paymentTermInMonths: 12,
+      paymentTerm: 12,
     };
 
     await expect(createUseCase.handle(creditSimulationInput)).rejects.toThrow(
