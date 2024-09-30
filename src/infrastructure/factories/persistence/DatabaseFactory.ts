@@ -11,7 +11,6 @@ export default class DatabaseFactory {
     }
 
     this.database = new Database(AppDataSource);
-    await this.database.connect();
     return this.database;
   }
 }
