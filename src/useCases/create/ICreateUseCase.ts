@@ -3,7 +3,7 @@ import { ICreditSimulation } from '@domain/entities/CreditSimulation';
 export interface ICreateCreditInput {
   id?: string;
   amount: number;
-  paymentTermInMonths: number;
+  paymentTerm: number;
   birthDate: Date;
 }
 

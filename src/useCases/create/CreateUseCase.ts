@@ -10,16 +10,16 @@ export default class CreateUseCase implements ICreateUseCase {
   public async handle(data: ICreateCreditInput): Promise<ICreditSimulation> {
     const age = this.calculateAge(new Date(data.birthDate));
     const interestRate = this.calculateRate(age);
-    const installmentsValue = this.calculateInstallmentValue(data.amount, interestRate, data.paymentTermInMonths);
+    const installmentsValue = this.calculateInstallmentValue(data.amount, interestRate, data.paymentTerm);
 
-    const amountToBePaid = Number((installmentsValue * data.paymentTermInMonths).toFixed(2));
+    const amountToBePaid = Number((installmentsValue * data.paymentTerm).toFixed(2));
 
     const amountPaidInInterest = Number((amountToBePaid - data.amount).toFixed(2));
 
     const credit = await this.creditRepository.create({
       id: uuidv4(),
       amount: data.amount,
-      paymentTermInMonths: data.paymentTermInMonths,
+      paymentTerm: data.paymentTerm,
       birthDate: data.birthDate,
       amountToBePaid: amountToBePaid,
       installmentsValue,

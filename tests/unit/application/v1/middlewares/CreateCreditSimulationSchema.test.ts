@@ -7,7 +7,7 @@ describe('createCreditSimulationSchema', () => {
     const req = {
       params: {},
       body: {
-        paymentTermInMonths: 10,
+        paymentTerm: 10,
         birthDate: '1990-01-01',
       },
     } as unknown as Request;
@@ -23,7 +23,7 @@ describe('createCreditSimulationSchema', () => {
     expect(res.json).toHaveBeenCalledWith({ error: '"amount" is required' });
   });
 
-  it('should throw error when paymentTermInMonths is missing', () => {
+  it('should throw error when paymentTerm is missing', () => {
     const req = {
       params: {},
       body: {
@@ -40,7 +40,7 @@ describe('createCreditSimulationSchema', () => {
     validateSchema('createCreditSimulationSchema', 'body')(req, res, jest.fn());
 
     expect(res.status).toHaveBeenCalledWith(BAD_REQUEST);
-    expect(res.json).toHaveBeenCalledWith({ error: '"paymentTermInMonths" is required' });
+    expect(res.json).toHaveBeenCalledWith({ error: '"paymentTerm" is required' });
   });
 
   it('should throw error when birthDate is missing', () => {
@@ -48,7 +48,7 @@ describe('createCreditSimulationSchema', () => {
       params: {},
       body: {
         amount: 50000,
-        paymentTermInMonths: 10,
+        paymentTerm: 10,
       },
     } as unknown as Request;
 
@@ -68,7 +68,7 @@ describe('createCreditSimulationSchema', () => {
       params: {},
       body: {
         amount: 'teste',
-        paymentTermInMonths: 10,
+        paymentTerm: 10,
         birthDate: '1990-01-01',
       },
     } as unknown as Request;
@@ -84,12 +84,12 @@ describe('createCreditSimulationSchema', () => {
     expect(res.json).toHaveBeenCalledWith({ error: '"amount" must be a number' });
   });
 
-  it('should throw error when paymentTermInMonths is in the wrong type', () => {
+  it('should throw error when paymentTerm is in the wrong type', () => {
     const req = {
       params: {},
       body: {
         amount: 40000,
-        paymentTermInMonths: 'teste',
+        paymentTerm: 'teste',
         birthDate: '1990-01-01',
       },
     } as unknown as Request;
@@ -102,15 +102,15 @@ describe('createCreditSimulationSchema', () => {
     validateSchema('createCreditSimulationSchema', 'body')(req, res, jest.fn());
 
     expect(res.status).toHaveBeenCalledWith(BAD_REQUEST);
-    expect(res.json).toHaveBeenCalledWith({ error: '"paymentTermInMonths" must be a number' });
+    expect(res.json).toHaveBeenCalledWith({ error: '"paymentTerm" must be a number' });
   });
 
-  it('should throw error when paymentTermInMonths is not an integer', () => {
+  it('should throw error when paymentTerm is not an integer', () => {
     const req = {
       params: {},
       body: {
         amount: 40000,
-        paymentTermInMonths: 4.5,
+        paymentTerm: 4.5,
         birthDate: '1990-01-01',
       },
     } as unknown as Request;
@@ -123,7 +123,7 @@ describe('createCreditSimulationSchema', () => {
     validateSchema('createCreditSimulationSchema', 'body')(req, res, jest.fn());
 
     expect(res.status).toHaveBeenCalledWith(BAD_REQUEST);
-    expect(res.json).toHaveBeenCalledWith({ error: '"paymentTermInMonths" must be an integer' });
+    expect(res.json).toHaveBeenCalledWith({ error: '"paymentTerm" must be an integer' });
   });
 
   it('should throw error when birthDate is in the wrong type', () => {
@@ -131,7 +131,7 @@ describe('createCreditSimulationSchema', () => {
       params: {},
       body: {
         amount: 40000,
-        paymentTermInMonths: 20,
+        paymentTerm: 20,
         birthDate: 'teste',
       },
     } as unknown as Request;

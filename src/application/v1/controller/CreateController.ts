@@ -8,8 +8,8 @@ export default class CreateController {
 
   public execute = async (request: Request, response: Response) => {
     try {
-      const { amount, paymentTermInMonths, birthDate }: ICreateCreditInput = request.body;
-      const credit = await this.createUseCase.handle({ amount, paymentTermInMonths, birthDate });
+      const { amount, paymentTerm, birthDate }: ICreateCreditInput = request.body;
+      const credit = await this.createUseCase.handle({ amount, paymentTerm, birthDate });
 
       return response.status(OK).json(credit);
     } catch (err: any) {

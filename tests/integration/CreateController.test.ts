@@ -22,7 +22,7 @@ describe('CreateController', () => {
   it('should return 200 when create a credit simulation #integration', async () => {
     const simulationRequest = {
       amount: 10000,
-      paymentTermInMonths: 36,
+      paymentTerm: 36,
       birthDate: '1990-12-05',
     };
 
@@ -38,7 +38,7 @@ describe('CreateController', () => {
           expect(err).toBeNull();
           expect(response.statusCode).toEqual(OK);
           expect(response.body.amount).toBe(10000);
-          expect(response.body.paymentTermInMonths).toBe(36);
+          expect(response.body.paymentTerm).toBe(36);
           expect(response.body.amountToBePaid).toBe(10469.16);
           expect(response.body.installmentsValue).toBe(290.81);
           expect(response.body.amountPaidInInterest).toBe(469.16);
@@ -59,7 +59,7 @@ describe('CreateController', () => {
         .post(`/v1/simulate`)
         .send({
           amount: 10000,
-          paymentTermInMonths: 36,
+          paymentTerm: 36,
           birthDate: '2010-12-05',
         })
         .end((_err, response) => {
@@ -79,7 +79,7 @@ describe('CreateController', () => {
         .post(`/v1/simulate`)
         .send({
           amount: 10000,
-          paymentTermInMonths: 36,
+          paymentTerm: 36,
           birthDate: '1924-12-05',
         })
         .end((_err, response) => {

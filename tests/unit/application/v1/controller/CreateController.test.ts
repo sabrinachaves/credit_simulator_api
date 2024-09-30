@@ -16,7 +16,7 @@ describe('CreateController', () => {
       body: {
         birthDate: new Date('2005-05-01'),
         amount: 15000,
-        paymentTermInMonths: 15,
+        paymentTerm: 15,
       },
     } as Request;
     const res: any = {
@@ -28,7 +28,7 @@ describe('CreateController', () => {
     createUseCase.handle = jest.fn().mockResolvedValue({
       id: faker.datatype.uuid(),
       amount: 15000,
-      paymentTermInMonths: 15,
+      paymentTerm: 15,
       birthDate: new Date('2005-05-01'),
       amountToBePaid: 15504.9,
       installmentsValue: 1033.66,
@@ -41,7 +41,7 @@ describe('CreateController', () => {
     expect(createUseCase.handle).toHaveBeenCalledWith({
       birthDate: new Date('2005-05-01'),
       amount: 15000,
-      paymentTermInMonths: 15,
+      paymentTerm: 15,
     });
     expect(res.status).toHaveBeenCalledWith(OK);
   });
@@ -52,7 +52,7 @@ describe('CreateController', () => {
       body: {
         birthDate: new Date('2010-05-01'),
         amount: 15000,
-        paymentTermInMonths: 15,
+        paymentTerm: 15,
       },
     } as Request;
     const res: any = {
@@ -68,7 +68,7 @@ describe('CreateController', () => {
     expect(createUseCase.handle).toHaveBeenCalledWith({
       birthDate: new Date('2010-05-01'),
       amount: 15000,
-      paymentTermInMonths: 15,
+      paymentTerm: 15,
     });
     expect(res.status).toHaveBeenCalledWith(UNPROCESSABLE_ENTITY);
   });
@@ -79,7 +79,7 @@ describe('CreateController', () => {
       body: {
         birthDate: new Date('2010-05-01'),
         amount: 15000,
-        paymentTermInMonths: 15,
+        paymentTerm: 15,
       },
     } as Request;
     const res: any = {
@@ -95,7 +95,7 @@ describe('CreateController', () => {
     expect(createUseCase.handle).toHaveBeenCalledWith({
       birthDate: new Date('2010-05-01'),
       amount: 15000,
-      paymentTermInMonths: 15,
+      paymentTerm: 15,
     });
     expect(res.status).toHaveBeenCalledWith(INTERNAL_SERVER_ERROR);
   });
