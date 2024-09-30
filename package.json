@@ -21,7 +21,8 @@
     "test:unit": "jest --bail --forceExit --passWithNoTests \"tests/unit/.*\\.test\\.ts\"",
     "test:integration": "jest --bail --forceExit --passWithNoTests \"tests/integration/.*\\.test\\.ts\"",
     "test:e2e": "jest --verbose --runInBand --passWithNoTests \"tests/e2e/.*\\.test\\.ts\"",
-    "test:coverage": "npm run test -- --coverage"
+    "test:coverage": "npm run test -- --coverage",
+    "stress:create": "autocannon localhost:3000/credit-simulation/v1/simulate -m POST -H 'Content-Type: application/json' -b '{\"amount\":10000,\"paymentTerm\":36,\"birthDate\":\"2000-12-05\"}' -c 5000 -d 10 --latency --renderStatusCode"
   },
   "husky": {
     "hooks": {
@@ -49,32 +50,34 @@
     "uuid": "^8.3.2"
   },
   "devDependencies": {
+    "@faker-js/faker": "^7.1.0",
+    "@types/autocannon": "^7.12.5",
     "@types/cors": "^2.8.17",
+    "@types/faker": "^5.1.4",
+    "@types/jest": "^27.5.1",
     "@types/multer": "^1.4.12",
     "@types/node": "^22.7.4",
-    "@types/uuid": "^8.3.4",
-    "@types/jest": "^27.5.1",
-    "@types/faker": "^5.1.4",
     "@types/supertest": "^2.0.12",
+    "@types/swagger-ui-express": "^4.1.3",
+    "@types/uuid": "^8.3.4",
     "@typescript-eslint/eslint-plugin": "^5.23.0",
     "@typescript-eslint/parser": "^5.5.0",
-    "@types/swagger-ui-express": "^4.1.3",
+    "autocannon": "^7.15.0",
+    "axios": "^1.6.0",
     "eslint": "^8.15.0",
     "eslint-plugin-import": "^2.26.0",
-    "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-jest": "^26.2.2",
+    "eslint-plugin-prettier": "^4.0.0",
     "husky": "^4.3.8",
+    "jest": "^27.4.3",
     "nodemon": "^2.0.16",
     "prettier": "^2.5.1",
+    "supertest": "^6.2.3",
+    "swagger-ui-dist": "^4.18.3",
+    "swagger-ui-express": "^4.4.0",
+    "ts-jest": "^27.0.7",
     "ts-node": "^10.9.2",
     "ts-node-dev": "^2.0.0",
-    "typescript": "^4.9.5",
-    "ts-jest": "^27.0.7",
-    "jest": "^27.4.3",
-    "@faker-js/faker": "^7.1.0",
-    "supertest": "^6.2.3",
-    "axios": "^1.6.0",
-    "swagger-ui-dist": "^4.18.3",
-    "swagger-ui-express": "^4.4.0"
+    "typescript": "^4.9.5"
   }
 }
