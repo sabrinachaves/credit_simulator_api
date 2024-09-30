@@ -8,7 +8,7 @@ export const AppDataSource = new DataSource({
   username: AppConfig.MYSQL_USER,
   password: AppConfig.MYSQL_ROOT_PASSWORD,
   database: AppConfig.MYSQL_DATABASE,
-  entities: [__dirname + '/../domain/entities/*.ts'],
+  entities: [__dirname + '/../../domain/entities/*.ts'],
   migrations: [__dirname + '/migrations/*.ts'],
   synchronize: false,
 });
