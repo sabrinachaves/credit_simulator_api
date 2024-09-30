@@ -49,7 +49,9 @@ export default class CreateUseCase implements ICreateUseCase {
   private calculateRate(age: number): number {
     let rate: number;
     if (age < 18) {
-      throw new UnprocessableEntityError('Age can not be less than 18 years old');
+      throw new UnprocessableEntityError('Age cannot be less than 18');
+    } else if (age > 95) {
+      throw new UnprocessableEntityError('Age cannot be greater than 95');
     } else if (age <= 25) {
       rate = 5;
     } else if (age <= 40) {
