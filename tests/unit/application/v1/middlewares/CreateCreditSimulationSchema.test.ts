@@ -2,7 +2,7 @@ import { Request } from 'express';
 import { BAD_REQUEST } from 'http-status';
 import { validateSchema } from '../../../../../src/application/v1/middlewares/ValidateSchema';
 
-describe('createCreditSimulationSchema', () => {
+describe('createSimulationSchema', () => {
   it('should throw error when amount is missing', () => {
     const req = {
       params: {},
@@ -17,7 +17,7 @@ describe('createCreditSimulationSchema', () => {
       json: jest.fn(),
     };
 
-    validateSchema('createCreditSimulationSchema', 'body')(req, res, jest.fn());
+    validateSchema('createSimulationSchema', 'body')(req, res, jest.fn());
 
     expect(res.status).toHaveBeenCalledWith(BAD_REQUEST);
     expect(res.json).toHaveBeenCalledWith({ error: '"amount" is required' });
@@ -37,7 +37,7 @@ describe('createCreditSimulationSchema', () => {
       json: jest.fn(),
     };
 
-    validateSchema('createCreditSimulationSchema', 'body')(req, res, jest.fn());
+    validateSchema('createSimulationSchema', 'body')(req, res, jest.fn());
 
     expect(res.status).toHaveBeenCalledWith(BAD_REQUEST);
     expect(res.json).toHaveBeenCalledWith({ error: '"paymentTerm" is required' });
@@ -57,7 +57,7 @@ describe('createCreditSimulationSchema', () => {
       json: jest.fn(),
     };
 
-    validateSchema('createCreditSimulationSchema', 'body')(req, res, jest.fn());
+    validateSchema('createSimulationSchema', 'body')(req, res, jest.fn());
 
     expect(res.status).toHaveBeenCalledWith(BAD_REQUEST);
     expect(res.json).toHaveBeenCalledWith({ error: '"birthDate" is required' });
@@ -78,7 +78,7 @@ describe('createCreditSimulationSchema', () => {
       json: jest.fn(),
     };
 
-    validateSchema('createCreditSimulationSchema', 'body')(req, res, jest.fn());
+    validateSchema('createSimulationSchema', 'body')(req, res, jest.fn());
 
     expect(res.status).toHaveBeenCalledWith(BAD_REQUEST);
     expect(res.json).toHaveBeenCalledWith({ error: '"amount" must be a number' });
@@ -99,7 +99,7 @@ describe('createCreditSimulationSchema', () => {
       json: jest.fn(),
     };
 
-    validateSchema('createCreditSimulationSchema', 'body')(req, res, jest.fn());
+    validateSchema('createSimulationSchema', 'body')(req, res, jest.fn());
 
     expect(res.status).toHaveBeenCalledWith(BAD_REQUEST);
     expect(res.json).toHaveBeenCalledWith({ error: '"paymentTerm" must be a number' });
@@ -120,7 +120,7 @@ describe('createCreditSimulationSchema', () => {
       json: jest.fn(),
     };
 
-    validateSchema('createCreditSimulationSchema', 'body')(req, res, jest.fn());
+    validateSchema('createSimulationSchema', 'body')(req, res, jest.fn());
 
     expect(res.status).toHaveBeenCalledWith(BAD_REQUEST);
     expect(res.json).toHaveBeenCalledWith({ error: '"paymentTerm" must be an integer' });
@@ -141,7 +141,7 @@ describe('createCreditSimulationSchema', () => {
       json: jest.fn(),
     };
 
-    validateSchema('createCreditSimulationSchema', 'body')(req, res, jest.fn());
+    validateSchema('createSimulationSchema', 'body')(req, res, jest.fn());
 
     expect(res.status).toHaveBeenCalledWith(BAD_REQUEST);
     expect(res.json).toHaveBeenCalledWith({ error: '"paymentTerm" must be a positive number' });
@@ -162,7 +162,7 @@ describe('createCreditSimulationSchema', () => {
       json: jest.fn(),
     };
 
-    validateSchema('createCreditSimulationSchema', 'body')(req, res, jest.fn());
+    validateSchema('createSimulationSchema', 'body')(req, res, jest.fn());
 
     expect(res.status).toHaveBeenCalledWith(BAD_REQUEST);
     expect(res.json).toHaveBeenCalledWith({ error: '"birthDate" must be a valid date' });

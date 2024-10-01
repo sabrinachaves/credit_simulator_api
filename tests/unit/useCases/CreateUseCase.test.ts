@@ -30,10 +30,6 @@ describe('CreateCreditSimulationUseCase', () => {
     expect(response).toHaveProperty('amount');
     expect(response).toHaveProperty('paymentTerm');
     expect(response).toHaveProperty('birthDate');
-    expect(response).toHaveProperty('amountToBePaid');
-    expect(response).toHaveProperty('installmentsValue');
-    expect(response).toHaveProperty('amountPaidInInterest');
-    expect(response).toHaveProperty('interestRate');
     expect(response.interestRate).toBe(5);
     expect(response.installmentsValue).toBe(1033.66);
     expect(response.amountToBePaid).toBe(15504.9);
@@ -54,10 +50,6 @@ describe('CreateCreditSimulationUseCase', () => {
     expect(response).toHaveProperty('amount');
     expect(response).toHaveProperty('paymentTerm');
     expect(response).toHaveProperty('birthDate');
-    expect(response).toHaveProperty('amountToBePaid');
-    expect(response).toHaveProperty('installmentsValue');
-    expect(response).toHaveProperty('amountPaidInInterest');
-    expect(response).toHaveProperty('interestRate');
     expect(response.interestRate).toBe(3);
     expect(response.installmentsValue).toBe(1020.12);
     expect(response.amountToBePaid).toBe(15301.8);
@@ -78,10 +70,6 @@ describe('CreateCreditSimulationUseCase', () => {
     expect(response).toHaveProperty('amount');
     expect(response).toHaveProperty('paymentTerm');
     expect(response).toHaveProperty('birthDate');
-    expect(response).toHaveProperty('amountToBePaid');
-    expect(response).toHaveProperty('installmentsValue');
-    expect(response).toHaveProperty('amountPaidInInterest');
-    expect(response).toHaveProperty('interestRate');
     expect(response.interestRate).toBe(2);
     expect(response.installmentsValue).toBe(1013.39);
     expect(response.amountToBePaid).toBe(15200.85);
@@ -102,10 +90,6 @@ describe('CreateCreditSimulationUseCase', () => {
     expect(response).toHaveProperty('amount');
     expect(response).toHaveProperty('paymentTerm');
     expect(response).toHaveProperty('birthDate');
-    expect(response).toHaveProperty('amountToBePaid');
-    expect(response).toHaveProperty('installmentsValue');
-    expect(response).toHaveProperty('amountPaidInInterest');
-    expect(response).toHaveProperty('interestRate');
     expect(response.interestRate).toBe(4);
     expect(response.installmentsValue).toBe(1026.87);
     expect(response.amountToBePaid).toBe(15403.05);

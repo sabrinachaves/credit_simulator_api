@@ -1,11 +1,11 @@
 import { Request } from 'express';
 import CreateController from '../../../../../src/application/v1/controller/CreateController';
 import CreateUseCaseMock from '../../../../mocks/CreateUseCaseMock';
-import { faker } from '@faker-js/faker';
 import { INTERNAL_SERVER_ERROR, OK, UNPROCESSABLE_ENTITY } from 'http-status';
 import UnprocessableEntityError from '../../../../../src/domain/exceptions/UnprocessableEntityError';
 import InternalServerError from '../../../../../src/domain/exceptions/InternalServerError';
 import ICreateUseCase from '../../../../../src/useCases/create/ICreateUseCase';
+import { CreditSimulationMock } from '../../../../mocks/CreditMock';
 
 describe('CreateController', () => {
   const createUseCase = new CreateUseCaseMock();
@@ -25,16 +25,7 @@ describe('CreateController', () => {
       })),
     };
 
-    createUseCase.handle = jest.fn().mockResolvedValue({
-      id: faker.datatype.uuid(),
-      amount: 15000,
-      paymentTerm: 15,
-      birthDate: new Date('2005-05-01'),
-      amountToBePaid: 15504.9,
-      installmentsValue: 1033.66,
-      amountPaidInInterest: 504.9,
-      interestRate: 5,
-    });
+    createUseCase.handle = jest.fn().mockResolvedValue({ ...CreditSimulationMock });
 
     await instance.execute(req, res);
 
