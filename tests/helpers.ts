@@ -1,13 +1,16 @@
 import { RequestHandler, Router, json } from 'express';
 import CreateControllerFactory from '../src/infrastructure/factories/controller/CreateControllerFactory';
+import ListControllerFactory from '../src/infrastructure/factories/controller/ListControllerFactory';
 import { AppConfig } from '../src/config/AppConfig';
 import App from '../src/application/App';
 import supertest from 'supertest';
 import ICreateUseCase from '../src/useCases/create/ICreateUseCase';
 import { validateSchema } from '../src/application/v1/middlewares/ValidateSchema';
+import IListUseCase from '../src/useCases/list/IListUseCase';
 
 interface MockServerOptions {
   createUseCase?: ICreateUseCase;
+  listUseCase?: IListUseCase;
 }
 
 const routes = async (options: MockServerOptions): Promise<Router> => {
@@ -17,6 +20,12 @@ const routes = async (options: MockServerOptions): Promise<Router> => {
     '/v1/simulate',
     validateSchema('createSimulationSchema', 'body'),
     (await CreateControllerFactory.make(options.createUseCase)).execute,
+  );
+
+  router.get(
+    '/v1/simulate',
+    validateSchema('listSimulationsSchema', 'query'),
+    (await ListControllerFactory.make(options.listUseCase)).execute,
   );
 
   return router;
