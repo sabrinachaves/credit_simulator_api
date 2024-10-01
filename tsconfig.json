@@ -31,7 +31,6 @@
       "@domain/*": ["./src/domain/*"],
       "@config/*": ["./src/config/*"],
       "@infrastructure/*": ["./src/infrastructure/*"],
-      "@helpers/*": ["./src/helpers/*"]
     }
   },
   "include": ["src/**/*.ts"]
