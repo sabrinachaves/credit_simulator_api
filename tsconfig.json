@@ -30,7 +30,7 @@
       "@useCases/*": ["./src/useCases/*"],
       "@domain/*": ["./src/domain/*"],
       "@config/*": ["./src/config/*"],
-      "@infrastructure/*": ["./src/infrastructure/*"],
+      "@infrastructure/*": ["./src/infrastructure/*"]
     }
   },
   "include": ["src/**/*.ts"]
