@@ -12,10 +12,11 @@ services:
       - MYSQL_PASSWORD=any                  
 
   credit_simulator_api:
-    image: node:16-alpine
+    build:
+      context: ../
+      dockerfile: ./Dockerfile
     volumes:
       - ../:/credit_simulator_api
-    working_dir: /credit_simulator_api
     depends_on:
       - database
     ports:
@@ -30,5 +31,6 @@ services:
       - MYSQL_USER=any
       - MYSQL_ROOT_PASSWORD=any
       - MYSQL_DATABASE=credit-simulator
+      - MYSQL_PASSWORD=any  
       - DB_PORT=3306
-    command: ash -c "npm i --no-update-notifier && npm run dev && npm run migration:run"
+    command: ash -c "npm run migration:run && npm run dev"
