@@ -1,0 +1,8 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ListController should match the snapshot #unit 1`] = `
+ListController {
+  "execute": [Function],
+  "listUseCase": Object {},
+}
+`;
