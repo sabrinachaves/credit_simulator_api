@@ -15,7 +15,7 @@ const routes = async (options: MockServerOptions): Promise<Router> => {
 
   router.post(
     '/v1/simulate',
-    validateSchema('createCreditSimulationSchema', 'body'),
+    validateSchema('createSimulationSchema', 'body'),
     (await CreateControllerFactory.make(options.createUseCase)).execute,
   );
 
