@@ -22,7 +22,7 @@
     "test:integration": "jest --bail --forceExit --passWithNoTests \"tests/integration/.*\\.test\\.ts\"",
     "test:e2e": "jest --verbose --runInBand --passWithNoTests \"tests/e2e/.*\\.test\\.ts\"",
     "test:coverage": "npm run test -- --coverage",
-    "stress:create": "autocannon localhost:3000/credit-simulation/v1/simulate -m POST -H 'Content-Type: application/json' -b '{\"amount\":10000,\"paymentTerm\":36,\"birthDate\":\"2000-12-05\"}' -c 1000 -d 10 --latency --renderStatusCode"
+    "stress:create": "autocannon localhost:3000/credit-simulation/v1/simulate -m POST -H 'Content-Type: application/json' -b '{\"amount\":10000,\"paymentTerm\":36,\"birthDate\":\"2000-12-05\"}' -c 500 -d 10 --latency --renderStatusCode"
   },
   "husky": {
     "hooks": {
@@ -38,6 +38,13 @@
   "dependencies": {
     "@babel/cli": "^7.17.10",
     "@babel/core": "^7.17.12",
+    "@babel/node": "^7.17.10",
+    "@babel/plugin-proposal-class-properties": "^7.17.12",
+    "@babel/plugin-proposal-decorators": "^7.17.12",
+    "@babel/plugin-transform-flow-strip-types": "^7.17.12",
+    "@babel/preset-env": "^7.17.12",
+    "@babel/preset-typescript": "^7.17.12",
+    "babel-plugin-module-resolver": "^4.1.0",
     "@types/express": "^4.17.13",
     "cors": "^2.8.5",
     "dotenv": "^16.0.1",
