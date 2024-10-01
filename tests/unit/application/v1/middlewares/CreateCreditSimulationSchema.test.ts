@@ -126,6 +126,27 @@ describe('createCreditSimulationSchema', () => {
     expect(res.json).toHaveBeenCalledWith({ error: '"paymentTerm" must be an integer' });
   });
 
+  it('should throw error when paymentTerm is negative', () => {
+    const req = {
+      params: {},
+      body: {
+        amount: 40000,
+        paymentTerm: -5,
+        birthDate: '1990-01-01',
+      },
+    } as unknown as Request;
+
+    const res: any = {
+      status: jest.fn().mockImplementation(() => res),
+      json: jest.fn(),
+    };
+
+    validateSchema('createCreditSimulationSchema', 'body')(req, res, jest.fn());
+
+    expect(res.status).toHaveBeenCalledWith(BAD_REQUEST);
+    expect(res.json).toHaveBeenCalledWith({ error: '"paymentTerm" must be a positive number' });
+  });
+
   it('should throw error when birthDate is in the wrong type', () => {
     const req = {
       params: {},
