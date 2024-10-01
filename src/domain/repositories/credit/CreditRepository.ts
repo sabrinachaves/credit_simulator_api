@@ -1,5 +1,6 @@
 import { ICreditSimulation, CreditSimulation } from '../../entities/CreditSimulation';
-import ICreditRepository, { IRetrieveCreditsFilters } from './ICreditRepository';
+import ICreditRepository from './ICreditRepository';
+import { IListCreditsFilters } from '../../../useCases/list/IListUseCase';
 import { Repository } from 'typeorm';
 
 export default class CreditRepository implements ICreditRepository {
@@ -11,18 +12,18 @@ export default class CreditRepository implements ICreditRepository {
   }
 
   async listCredits(
-    filters?: IRetrieveCreditsFilters,
+    filters?: IListCreditsFilters,
     page: number = 1,
     pageSize: number = 10,
   ): Promise<ICreditSimulation[]> {
     const query = this.creditRepository.createQueryBuilder('creditSimulation');
 
-    if (filters?.minCreditValue) {
-      query.andWhere('creditSimulation.value >= :minCreditValue', { minCreditValue: filters.minCreditValue });
+    if (filters?.minAmount) {
+      query.andWhere('creditSimulation.amount >= :minAmount', { minAmount: filters.minAmount });
     }
 
-    if (filters?.maxCreditValue) {
-      query.andWhere('creditSimulation.value <= :maxCreditValue', { maxCreditValue: filters.maxCreditValue });
+    if (filters?.maxAmount) {
+      query.andWhere('creditSimulation.amount <= :maxAmount', { maxAmount: filters.maxAmount });
     }
 
     if (filters?.createdAfter) {
@@ -33,7 +34,10 @@ export default class CreditRepository implements ICreditRepository {
       query.andWhere('creditSimulation.createdAt <= :createdBefore', { createdBefore: filters?.createdBefore });
     }
 
-    query.skip((page - 1) * pageSize).take(pageSize);
+    query
+      .orderBy('creditSimulation.createdAt', 'ASC')
+      .skip((page - 1) * pageSize)
+      .take(pageSize);
 
     return await query.getMany();
   }
