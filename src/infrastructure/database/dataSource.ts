@@ -1,4 +1,4 @@
-import { AppConfig } from '@config/AppConfig';
+import { AppConfig } from '../../config/AppConfig';
 import { DataSource } from 'typeorm';
 
 export const AppDataSource = new DataSource({

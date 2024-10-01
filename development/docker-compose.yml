@@ -33,4 +33,4 @@ services:
       - MYSQL_DATABASE=credit-simulator
       - MYSQL_PASSWORD=any  
       - DB_PORT=3306
-    command: ash -c "npm run migration:run && npm run dev"
+    command: ash -c "npm run migration:run && npm run seeds:clearDb && npm run seeds:generate && npm run dev"
