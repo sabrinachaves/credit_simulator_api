@@ -87,6 +87,82 @@
             "description": "Internal server error"
           }
         }
+      },
+      "get": {
+        "summary": "List credit simulations",
+        "tags": [
+          "Credit Simulation"
+        ],
+        "parameters": [
+          {
+            "name": "minAmount",
+            "in": "query",
+            "schema": {
+              "type": "number"
+            },
+            "description": "This parameter can be used to filter simulations with a request for a value above minAmount."
+          },
+          {
+            "name": "maxAmount",
+            "in": "query",
+            "schema": {
+              "type": "number"
+            },
+            "description": "This parameter can be used to filter simulations with a request for a value below maxAmount."
+          },
+          {
+            "name": "createdAfter",
+            "in": "query",
+            "schema": {
+              "type": "number",
+              "format": "date"
+            },
+            "description": "This parameter can be used to filter simulations created after some date."
+          },
+          {
+            "name": "createdBefore",
+            "in": "query",
+            "schema": {
+              "type": "number",
+              "format": "date"
+            },
+            "description": "This parameter can be used to filter simulations created before some date."
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "number"
+            },
+            "description": "This parameter can be used to change the page returned."
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "schema": {
+              "type": "number"
+            },
+            "description": "This parameter can be used to determine how many simulations will be shown per page."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Credit simulations listed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ICreditSimulation"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
       }
     }
   },
