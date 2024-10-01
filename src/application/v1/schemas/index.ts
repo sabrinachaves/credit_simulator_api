@@ -1,5 +1,7 @@
-import createCreditSimulationSchema from './CreateCreditSimulationSchema';
+import createSimulationSchema from './CreateSimulationSchema';
+import listSimulationsSchema from './ListSimulationsSchema';
 
 export default {
-  createCreditSimulationSchema,
+  createSimulationSchema,
+  listSimulationsSchema,
 };
