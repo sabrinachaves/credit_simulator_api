@@ -7,10 +7,14 @@ describe('CreditRepository', () => {
   let typeormMock = {} as Repository<CreditSimulation>;
   beforeEach(() => {
     typeormMock = {
-      create: jest.fn(),
       save: jest.fn(),
-      findOneAndUpdate: jest.fn(),
-      startSession: jest.fn(),
+      createQueryBuilder: jest.fn().mockReturnValue({
+        andWhere: jest.fn().mockReturnThis(),
+        orderBy: jest.fn().mockReturnThis(),
+        skip: jest.fn().mockReturnThis(),
+        take: jest.fn().mockReturnThis(),
+        getMany: jest.fn(),
+      }),
     } as unknown as Repository<CreditSimulation>;
   });
 
@@ -31,13 +35,12 @@ describe('CreditRepository', () => {
       const creditToBeMocked = CreditSimulationMock;
 
       typeormMock.save = jest.fn().mockResolvedValueOnce({ ...creditToBeMocked });
-      typeormMock.create = jest.fn().mockResolvedValueOnce({ ...creditToBeMocked });
 
       const repository = new CreditRepository(typeormMock);
       const data = await repository.create(creditToBeMocked);
 
       expect(data).toEqual({ ...creditToBeMocked });
-      expect(typeormMock.create).toHaveBeenCalled();
+      expect(typeormMock.save).toHaveBeenCalled();
     });
 
     it('should return an error when trying to create a credit simulation', async () => {
@@ -46,7 +49,50 @@ describe('CreditRepository', () => {
       const repository = new CreditRepository(typeormMock);
       await expect(repository.create(CreditSimulationMock)).rejects.toThrow(new Error('invalid credit simulation'));
 
-      expect(typeormMock.create).toHaveBeenCalled();
+      expect(typeormMock.save).toHaveBeenCalled();
+    });
+  });
+
+  describe('list #unit', () => {
+    it('should list credit simulations from database', async () => {
+      typeormMock.createQueryBuilder().getMany = jest.fn().mockResolvedValueOnce([{ ...CreditSimulationMock }]);
+
+      const repository = new CreditRepository(typeormMock);
+      const data = await repository.listCredits();
+
+      expect(data).toEqual([CreditSimulationMock]);
+      expect(typeormMock.createQueryBuilder).toHaveBeenCalled();
+      expect(typeormMock.createQueryBuilder().orderBy).toHaveBeenCalled();
+      expect(typeormMock.createQueryBuilder().andWhere).not.toHaveBeenCalled();
+      expect(typeormMock.createQueryBuilder().skip).toHaveBeenCalled();
+      expect(typeormMock.createQueryBuilder().take).toHaveBeenCalled();
+    });
+
+    it('should list credit simulations from database with filters', async () => {
+      typeormMock.createQueryBuilder().getMany = jest.fn().mockResolvedValueOnce([{ ...CreditSimulationMock }]);
+
+      const repository = new CreditRepository(typeormMock);
+      const data = await repository.listCredits({ minAmount: 15000 });
+
+      expect(data).toEqual([CreditSimulationMock]);
+      expect(typeormMock.createQueryBuilder).toHaveBeenCalled();
+      expect(typeormMock.createQueryBuilder().orderBy).toHaveBeenCalled();
+      expect(typeormMock.createQueryBuilder().andWhere).toHaveBeenCalled();
+      expect(typeormMock.createQueryBuilder().skip).toHaveBeenCalled();
+      expect(typeormMock.createQueryBuilder().take).toHaveBeenCalled();
+    });
+
+    it('should return an error when trying to list credit simulations', async () => {
+      typeormMock.createQueryBuilder().getMany = jest.fn().mockRejectedValueOnce(new Error('invalid search'));
+
+      const repository = new CreditRepository(typeormMock);
+      await expect(repository.listCredits()).rejects.toThrow(new Error('invalid search'));
+
+      expect(typeormMock.createQueryBuilder().getMany).toHaveBeenCalled();
+      expect(typeormMock.createQueryBuilder().orderBy).toHaveBeenCalled();
+      expect(typeormMock.createQueryBuilder().andWhere).not.toHaveBeenCalled();
+      expect(typeormMock.createQueryBuilder().skip).toHaveBeenCalled();
+      expect(typeormMock.createQueryBuilder().take).toHaveBeenCalled();
     });
   });
 });
