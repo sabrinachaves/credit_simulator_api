@@ -4,7 +4,7 @@ Esta aplicação tem por objetivo realizar a simulação de créditos, com difer
 
 ## Instruções de setup
 ### Como rodar a aplicação:
-Para rodar a aplicação localmente é necessário ter o Docker e o Docker Compose instalados na máquina, em seguida basta rodar os comandos abaixo na <b>raiz do projeto</b>:
+Para rodar a aplicação localmente é necessário ter o Docker, o Docker Compose e o node instalados na máquina, em seguida basta rodar os comandos abaixo na <b>raiz do projeto</b>:
 
 - Para configurar as variáveis de ambiente necessárias deve-se copiar o conteúdo do arquivo "sample.env" para um arquivo ".env":
 ```
