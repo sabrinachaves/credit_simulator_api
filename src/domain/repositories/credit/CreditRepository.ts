@@ -7,8 +7,7 @@ export default class CreditRepository implements ICreditRepository {
   constructor(private creditRepository: Repository<CreditSimulation>) {}
 
   async create(data: ICreditSimulation): Promise<ICreditSimulation> {
-    const credit = this.creditRepository.create(data);
-    return await this.creditRepository.save(credit);
+    return await this.creditRepository.save(data);
   }
 
   async listCredits(
