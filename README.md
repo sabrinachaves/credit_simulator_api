@@ -1,4 +1,6 @@
 # Credit Simulator API
+Esta aplicação tem por objetivo realizar a simulação de créditos, com diferentes taxas de juros a depender da idade do solicitante.
+
 
 ## Instruções de setup
 ### Como rodar a aplicação:
