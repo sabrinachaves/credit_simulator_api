@@ -74,13 +74,19 @@ Obs: No arquivo package.json é possível ver todos os scripts disponíveis.
 
 ## Como rodar os testes de desempenho:
 
-Para realizar os testes de desempenho foi utilizada a biblioteca "autocannon". Para rodar e ver os resultados de latência, statusCode, deve-se rodar o comando abaixo com a aplicação rodando:
+Para realizar os testes de desempenho foi utilizada a biblioteca "autocannon". Para rodar e ver os resultados de latência, statusCode, deve-se rodar os comandos abaixo com a aplicação em execução:
 
+- Rota de create
 ```
 npm run stress:create
 ```
 
-O script desse comando está configurado para ter 100 conexões concorrentes em 10 segundos. A partir disso, é possível os resultados de latência máxima, média, por percentil, requisições por segundo, volume de bytes baixados e o número total de requisições nesse período. Para alterar o número de conexões é preciso mudar o valor da flag -c no script "stress:create" e para alterar o tempo de duração do teste é preciso alterar a flag -d.
+- Rota de get
+```
+npm run stress:get
+```
+
+Os scripts desses comandos estão configurados para ter 300 conexões simultâneas (usuários) em 10 segundos. A partir disso, é possível ver os resultados de latência máxima, média, por percentil, requisições por segundo, volume de bytes baixados e o número total de requisições nesse período. Para alterar o número de conexões é preciso mudar o valor da flag -c e para alterar o tempo de duração do teste é preciso mudar a flag -d nos scripts "stress:create" e "stress:get".
 
 Os resultados são apresentados em tabelas no terminal.
 
@@ -88,15 +94,15 @@ Os resultados são apresentados em tabelas no terminal.
 
 O projeto foi construído utilizando Node.js e TypeScript. Este último foi escolhido por adicionar tipagem ao JavaScript, o que facilita o processo de desenvolvimento, tornando-o menos suscetível a erros que poderiam ocorrer devido à flexibilidade do JavaScript.
 
-Para a modelagem do código, foi utilizado o DDD (Domain-Driven Design), com camadas de domínio, aplicação, infraestrutura e casos de uso (use cases), a fim de garantir uma maior separação de responsabilidades, um código mais organizado e alterações que causem menos impacto nas outras partes do sistema, além de permitir uma boa flexibilidade e evolução do código.
+A arquitetura de software foi organizada em camadas, com divisões de domínio, aplicação, infraestrutura e casos de uso (services). Essa estrutura visa garantir uma clara separação de responsabilidades, resultando em um código mais organizado, com menor impacto em outras partes do sistema durante mudanças, além de proporcionar flexibilidade e facilitar a evolução contínua do projeto.
 
 Para a persistência dos dados, foi utilizado o banco relacional MySQL em conjunto com o TypeORM, que facilita o mapeamento das entidades, a criação de tabelas e a inserção/recuperação de itens, utilizando o próprio TypeScript, sem a necessidade de escrever SQL manualmente.
 
 Priorizando a padronização do código, foram utilizadas ferramentas como ESLint e Prettier para evitar problemas e garantir uma formatação consistente.
 
-Para garantir o funcionamento correto da aplicação, foram realizados testes unitários, de integração e de ponta a ponta (end-to-end), que auxiliam na identificação de se a aplicação funciona como o esperado e se continua a operar corretamente após modificações no código.
+Para garantir o funcionamento correto da aplicação, foram realizados testes unitários, de integração e end-to-end, que auxiliam na identificação de se a aplicação funciona como o esperado e se continua a operar corretamente após modificações no código.
 
-Para executar a aplicação e integrar o código com o banco de dados, foram utilizados o Docker e o Docker Compose. Simplificando o processo de configuração do ambiente e garantindo a consistência ao rodar em diferetes máquinas. 
+Para executar a aplicação e integrar o código com o banco de dados, foram utilizados o Docker e o Docker Compose. Simplificando o processo de configuração do ambiente e garantindo a consistência ao rodar em diferentes máquinas. 
 
 A documentação foi feita por meio do Swagger, para facilitar o entendimento das rotas presentes na API, dos contratos utilizados, dos possíveis erros e os retornos das rotas. Além disso, também permite testes manuais na aplicação. 
 
