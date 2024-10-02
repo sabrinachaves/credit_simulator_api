@@ -22,7 +22,8 @@
     "test:integration": "jest --bail --forceExit --passWithNoTests \"tests/integration/.*\\.test\\.ts\"",
     "test:e2e": "jest --verbose --runInBand --passWithNoTests \"tests/e2e/.*\\.test\\.ts\"",
     "test:coverage": "npm run test -- --coverage",
-    "stress:create": "autocannon localhost:3000/credit-simulation/v1/simulate -m POST -H 'Content-Type: application/json' -b '{\"amount\":10000,\"paymentTerm\":36,\"birthDate\":\"2000-12-05\"}' -c 500 -d 10 --latency --renderStatusCode",
+    "stress:create": "autocannon localhost:3000/credit-simulation/v1/simulate -m POST -H 'Content-Type: application/json' -b '{\"amount\":10000,\"paymentTerm\":36,\"birthDate\":\"2000-12-05\"}' -c 300 -d 10 --latency --renderStatusCode",
+    "stress:get": "autocannon localhost:3000/credit-simulation/v1/simulate -c 300 -d 10 --latency --renderStatusCode",
     "seeds:generate": "ts-node --project tsconfig.json ./development/seeds/generateSeeds.ts",
     "seeds:clearDb": "ts-node --project tsconfig.json ./development/seeds/clearDatabase.ts"
   },
